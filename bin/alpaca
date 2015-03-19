@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'alpaca'
+
+include GLI::App
+
+program_desc 'Describe your application here'
+
+version Alpaca::VERSION
+
+subcommand_option_handling :normal
+arguments :strict
+
+desc 'Describe configure here'
+arg_name 'Describe arguments to configure here'
+command :configure do |c|
+  c.action do |_, _, _|
+    puts 'configure command ran'
+  end
+end
+
+on_error do |exception|
+  puts exception.backtrace
+  true
+end
+
+exit run(ARGV)

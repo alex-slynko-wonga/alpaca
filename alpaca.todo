@@ -1,0 +1,30 @@
+Configuration:
+ ☐ Create default configuration
+ ✔ `alpaca configure --global prop=value` @done (15-03-19 22:50)
+ ✔ `alpaca configure --local prop=value` @done (15-03-19 22:50)
+ ☐ load default -> override by global -> override by local
+ ☐ `alpaca show configuration` (default + global)
+ ☐ `alpaca show configuration --for-solutions='**/*.sln'`
+ ☐ detokenize OS
+ ☐ detokenize solution variables(<SOLUTION_FOLDER>, <SOLUTION_NAME>)
+ ☐ do not load default and global configuration for each solution
+
+GLOBAL:
+ ☐ configuration
+ ☐ solution
+ ☐ versioning
+
+Solution(*.sln, *.gemspec):
+ ☐ file
+ ☐ folder
+ ☐ build (--[no-]restore-packages, --debug/-d)
+ ☐ test (--specs, --features, --load, --smoke), (--coverage/-d)
+ ☐ pack (--[no-]changes-check)
+ ☐ push
+ ☐ promote
+
+Versioning:
+ ☐ find .semver for solution
+ ☐ load specific .semver
+ ☐ release
+ ☐ increase (--major, --minor, --patch, --pre-release)
