@@ -109,7 +109,31 @@ describe Alpaca::Configuration do
   describe '.new' do
     context 'when global configuration exist' do
       context 'and local configuration overrides it' do
+        let(:global_config) { File.expand_path '~/.alpaca.conf' }
+        let(:global_content) do
+          <<EOF
+---
+local_config: "#{SOLUTION_FOLDER}/.alpaca.conf"
+Tool:
+  property: old_value
+  target: "#{SOLUTION_NAME}"
+EOF
+        end
+        let(:local_config) { File.expand_path 'c:\alpaca\.alpaca.conf' }
+        let(:solution) do
+          solution = OpenStruct.new
+          solution.file = 'c:\alpaca\alpaca.sln'
+          solution
+        end
+        before(:each) do
+          FileUtils.mkdir_p(File.dirname(file))
+          File.open(file, 'w+') { |f| f.write content }
+        end
+
         it 'merges global with local with higher priority to local'
+        it 'detokenize OS from configuration'
+        it 'detokenize solution variable SOLUTION_NAME'
+        it 'detokenize solution variable SOLUTION_FOLDER'
       end
     end
   end

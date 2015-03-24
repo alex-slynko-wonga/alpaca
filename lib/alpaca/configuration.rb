@@ -33,6 +33,9 @@ module Alpaca
       end
     end
 
+    # Creates instance of local configuration
+    #
+    # +solution+:: solution object to find configuration for
     def initialize(solution)
       config_dir = File.dirname(solution.file)
       @file = File.join(config_dir, '.alpaca.conf')
