@@ -52,10 +52,19 @@ describe Alpaca::Configuration do
   end
 
   describe '#set' do
-    let(:file) { File.expand_path 'd:\solution\.alpaca.conf' }
+    let(:file_path) do
+      require 'rbconfig'
+      case RbConfig::CONFIG['host_os']
+      when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+        'd:\solution'
+      else
+        '/home/solution'
+      end
+    end
+    let(:file) { File.join file_path, '.alpaca.conf' }
     let(:solution) do
       solution = OpenStruct.new
-      solution.file = 'd:\solution\some.sln'
+      solution.file = File.join(file_path, 'some.sln')
       solution
     end
     subject do
