@@ -1,3 +1,4 @@
+require 'yaml'
 module Alpaca
   # The *Version* class contains semantic version and methods
   # for updating it
@@ -51,12 +52,12 @@ module Alpaca
     #   v.format 'v%M.%m.%p%s%d'
     #     # => "v1.2.3-rc+03fb4"
     def to_s(format = 'v%M.%m.%p%s%d')
-      format = format.gsub '%M', @major.to_s
-      format = format.gsub '%m', @minor.to_s
-      format = format.gsub '%p', @patch.to_s
-      format = format.gsub('%s', prerelease? ? "-#{@special}" : '')
-      format = format.gsub('%d', metadata? ? "+#{@metadata}" : '')
-      format
+      result = format.gsub '%M', @major.to_s
+      result.gsub! '%m', @minor.to_s
+      result.gsub! '%p', @patch.to_s
+      result.gsub!('%s', prerelease? ? "-#{@special}" : '')
+      result.gsub!('%d', metadata? ? "+#{@metadata}" : '')
+      result
     end
 
     # Returns yaml representation that can be stored to .semver file
@@ -67,12 +68,12 @@ module Alpaca
 
     # Returns true if #special isn't empty. Otherwise, false.
     def prerelease?
-      !@special.nil? && @special.length > 0
+      !@special.nil? && !@special.empty?
     end
 
     # Returns true if #metadata isn't empty. Otherwise, false.
     def metadata?
-      !@metadata.nil? && @metadata.length > 0
+      !@metadata.nil? && !@metadata.empty?
     end
 
     # Increase version following semantic version rules
